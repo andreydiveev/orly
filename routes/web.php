@@ -14,3 +14,8 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->get('/entrypointi6l9bpCsguYpc', function () use ($router) {
+    return $router->app->version();
+});
+
