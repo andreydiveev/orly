@@ -1,5 +1,8 @@
 <?php
 require_once "../vendor/autoload.php";
+
+echo 123;
+
 try {
     $bot = new \TelegramBot\Api\Client(getenv('TELEGRAM_BOT_TOKEN'));
     $bot->command('devanswer', function ($message) use ($bot) {
