@@ -16,10 +16,8 @@ $router->get('/', function () use ($router) {
 });
 
 $router->post('/entrypointi6l9bpCsguYpc', function () use ($router) {
-
-file_put_contents('in.txt', 123);
     try {
-        $bot = new \TelegramBot\Api\Client(env('TELEGRAM_API_TOKEN'));
+        $bot = new \TelegramBot\Api\Client(env('TELEGRAM_BOT_TOKEN'));
         // or initialize with botan.io tracker api key
         // $bot = new \TelegramBot\Api\Client('YOUR_BOT_API_TOKEN', 'YOUR_BOTAN_TRACKER_API_KEY');
 
