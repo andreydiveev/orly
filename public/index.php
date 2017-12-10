@@ -1,28 +1,16 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Create The Application
-|--------------------------------------------------------------------------
-|
-| First we need to get an application instance. This creates an instance
-| of the application / container and bootstraps the application so it
-| is ready to receive HTTP / Console requests from the environment.
-|
-*/
-
-$app = require __DIR__.'/../bootstrap/app.php';
-
-/*
-|--------------------------------------------------------------------------
-| Run The Application
-|--------------------------------------------------------------------------
-|
-| Once we have the application, we can handle the incoming request
-| through the kernel, and send the associated response back to
-| the client's browser allowing them to enjoy the creative
-| and wonderful application we have prepared for them.
-|
-*/
-
-$app->run();
+require_once "../vendor/autoload.php";
+try {
+    $bot = new \TelegramBot\Api\Client(getenv('TELEGRAM_BOT_TOKEN'));
+    $bot->command('devanswer', function ($message) use ($bot) {
+        preg_match_all('/{"text":"(.*?)",/s', file_get_contents('http://devanswers.ru/'), $result);
+        $bot->sendMessage($message->getChat()->getId(),
+            str_replace("<br/>", "\n", json_decode('"' . $result[1][0] . '"')));
+    });
+    $bot->command('qaanswer', function ($message) use ($bot) {
+        $bot->sendMessage($message->getChat()->getId(), file_get_contents('http://qaanswers.ru/qwe.php'));
+    });
+    $bot->run();
+} catch (\TelegramBot\Api\Exception $e) {
+    $e->getMessage();
+}
