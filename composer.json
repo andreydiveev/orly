@@ -9,8 +9,7 @@
         "laravel/lumen-framework": "5.5.*",
         "vlucas/phpdotenv": "~2.2",
         "telegram-bot/api": "^2.3",
-        "guzzlehttp/guzzle": "^6.3",
-        "orlydev/heroku-nano": "*"
+        "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
