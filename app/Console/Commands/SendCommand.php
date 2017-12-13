@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Services\PwAuthService;
 
-class LoginCommand extends Command {
+class SendCommand extends Command {
 
     protected $signature = 'pw:login';
 
@@ -14,6 +14,11 @@ class LoginCommand extends Command {
 
         $service = new PwAuthService();
 
-        var_dump($service->send());
+        $title = '3322заголовок';
+        $text  = '***текст***';
+
+        $result = $service->send($title, $text);
+
+        var_dump($result);
     }
 }

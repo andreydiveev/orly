@@ -7,7 +7,7 @@ use GuzzleHttp\Client;
 class PwAuthService
 {
 
-    public function send()
+    public function send($title, $text)
     {
         $url = 'https://api.push.world/v2/multicast/send';
 
@@ -18,8 +18,8 @@ class PwAuthService
             'form_params' => [
                 'platform_code' => env('PW_PLATFORM_CODE'),
                 'multicast' => json_encode([
-                    "title" => "252пуш-уведомление11, отправленное через API",
-                    "text" => "это тествове пуш-уведомление отправлено через api.push.world. При клике отправляем на статью в блоге.",
+                    "title" => $title,
+                    "text" => $text,
                     "url" => "https://push.world/help/rich-push-v2",
                     "image" => "https://the-challenger.ru/wp-content/uploads/2015/06/shutterstock_115383406-800x538.jpg",
                     "image_large" => "https://push.world/img/logo/logo_push_world_og.png",

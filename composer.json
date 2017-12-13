@@ -9,7 +9,8 @@
         "laravel/lumen-framework": "5.5.*",
         "vlucas/phpdotenv": "~2.2",
         "telegram-bot/api": "^2.3",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "orlydev/heroku-nano": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -28,6 +29,12 @@
             "database/"
         ]
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/orlydev/heroku-nano"
+        }
+    ],
     "scripts": {
         "post-root-package-install": [
             "php -r \"copy('.env.example', '.env');\""
