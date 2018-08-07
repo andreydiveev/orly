@@ -28,7 +28,8 @@ $router->post('/entrypointi6l9bpCsguYpc', function () use ($router) {
 
         $bot->command('list', function ($message) use ($bot) {
             $msg = "List...\n";
-//            $g = new \Google\Authenticator\GoogleAuthenticator();
+            $g = new \Google\Authenticator\GoogleAuthenticator();
+            $msg .= $g->getCode('123');
 //            $secrets = \App\Models\Secret::get();
 //            foreach ($secrets as $s) {
 //                $msg .= $g->getCode($s->secret) . " - " . $s->label . "\n";
