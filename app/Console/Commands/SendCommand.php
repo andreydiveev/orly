@@ -11,18 +11,6 @@ class SendCommand extends Command {
 
     public function handle()
     {
-$bot = '';
-$r = function ($message) use ($bot) {
-            $msg = "List...\n";
-            $g = new \Google\Authenticator\GoogleAuthenticator();
-
-                $secrets = \App\Models\Secret::get();
-                foreach ($secrets as $s) {
-                    $msg .= $g->getCode($s->secret) . " - " . $s->label . "\n";
-                }
-echo $msg;exit;
-};$r('ff');
-
         $service = new PwAuthService();
 
         $title = '3322заголовок';
