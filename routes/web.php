@@ -26,6 +26,11 @@ $router->post('/entrypointi6l9bpCsguYpc', function () use ($router) {
             $bot->sendMessage($message->getChat()->getId(), $msg);
         });
 
+        $bot->command('list', function ($message) use ($bot) {
+            $msg = "List...";
+            $bot->sendMessage($message->getChat()->getId(), $msg);
+        });
+
         $bot->run();
 
     } catch (\TelegramBot\Api\Exception $e) {
