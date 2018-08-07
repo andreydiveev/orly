@@ -27,7 +27,7 @@ $router->post('/entrypointi6l9bpCsguYpc', function () use ($router) {
         });
 
         $bot->command('list', function ($message) use ($bot) {
-            $msg = "List...\n";
+            $msg = "Our 2fa:\n";
 
             $g = new \Google\Authenticator\GoogleAuthenticator();
             $secrets = \App\Models\Secret::get();
