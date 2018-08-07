@@ -11,12 +11,19 @@ class SendCommand extends Command {
 
     public function handle()
     {
+
 $msg = "List...\n";
             $g = new \Google\Authenticator\GoogleAuthenticator();
-            $secrets = \App\Models\Secret::get();
-            foreach ($secrets as $s) {
-                $msg .= $g->getCode($s->secret) . " - " . $s->label . "\n";
+
+            try {
+                $secrets = \App\Models\Secret::get();
+                foreach ($secrets as $s) {
+                    $msg .= $g->getCode($s->secret) . " - " . $s->label . "\n";
+                }
+            } catch (\Exception $e) {
+                $msg .= $e->getMessage();
             }
+
 
 echo $msg;exit;
 
