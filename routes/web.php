@@ -31,7 +31,7 @@ $router->post('/entrypointi6l9bpCsguYpc', function () use ($router) {
             $g = new \Google\Authenticator\GoogleAuthenticator();
             $secrets = \App\Models\Secret::get();
             foreach ($secrets as $s) {
-                $msg .= $g->getCode($s->secret) . " - " . $s->label . "\n";
+//                $msg .= $g->getCode($s->secret) . " - " . $s->label . "\n";
             }
             $bot->sendMessage($message->getChat()->getId(), $msg);
         });
