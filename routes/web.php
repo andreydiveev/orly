@@ -27,7 +27,12 @@ $router->post('/entrypointi6l9bpCsguYpc', function () use ($router) {
         });
 
         $bot->command('list', function ($message) use ($bot) {
-            $msg = "List...";
+            $msg = "List...\n";
+            $g = new \Google\Authenticator\GoogleAuthenticator();
+            $secrets = \App\Model\Secret::get();
+            foreach ($secrets as $s) {
+                $msg .= $g->getCode($s->secret) . " - " . $s->label . "\n";
+            }
             $bot->sendMessage($message->getChat()->getId(), $msg);
         });
 
