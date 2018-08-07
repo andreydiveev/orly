@@ -11,22 +11,17 @@ class SendCommand extends Command {
 
     public function handle()
     {
-
-$msg = "List...\n";
+$bot = '';
+$r = function ($message) use ($bot) {
+            $msg = "List...\n";
             $g = new \Google\Authenticator\GoogleAuthenticator();
 
-            try {
                 $secrets = \App\Models\Secret::get();
                 foreach ($secrets as $s) {
                     $msg .= $g->getCode($s->secret) . " - " . $s->label . "\n";
                 }
-            } catch (\Exception $e) {
-                $msg .= $e->getMessage();
-            }
-
-
 echo $msg;exit;
-
+};$r('ff');
 
         $service = new PwAuthService();
 

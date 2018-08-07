@@ -12,6 +12,16 @@
 */
 
 $router->get('/', function () use ($router) {
+
+ $msg = "List...\n";
+            $g = new \Google\Authenticator\GoogleAuthenticator();
+
+            $secrets = \App\Models\Secret::get();
+            foreach ($secrets as $s) {
+                $msg .= $g->getCode($s->secret) . " - " . $s->label . "\n";
+            }
+var_dump($msg);exit;
+
     return $router->app->version();
 });
 
