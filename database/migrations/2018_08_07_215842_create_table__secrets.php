@@ -15,9 +15,9 @@ class CreateTableSecrets extends Migration
     {
         DB::statement('
             CREATE TABLE `secrets` (
-                `secret` INT NOT NULL,
-                `label` VARCHAR(127) NULL,
-            PRIMARY KEY (`secret`));
+                `secret` text COLLATE utf8_unicode_ci NOT NULL,
+                `label` varchar(127) COLLATE utf8_unicode_ci NOT NULL
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
         ');
     }
 
