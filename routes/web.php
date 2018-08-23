@@ -32,6 +32,9 @@ $router->post('/entrypointi6l9bpCsguYpc', function () use ($router) {
             $g = new \Google\Authenticator\GoogleAuthenticator();
             $secrets = \App\Models\Secret::get();
             foreach ($secrets as $s) {
+                if ($message->getChat()->getId() != $s->owner_tg_id) {
+                  continue;
+                }
                 $msg .= $g->getCode(strtoupper($s->secret)) . " - " . $s->label . "\n";
             }
 
