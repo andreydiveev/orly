@@ -27,7 +27,7 @@ $router->post('/entrypointi6l9bpCsguYpc', function () use ($router) {
         });
 
         $bot->command('list', function ($message) use ($bot) {
-            $msg = "Our 2fa:\n";
+            $msg = "*Our 2fa:*\n";
 
             $g = new \Google\Authenticator\GoogleAuthenticator();
             $secrets = \App\Models\Secret::get();
@@ -39,7 +39,7 @@ $router->post('/entrypointi6l9bpCsguYpc', function () use ($router) {
             }
 
             $msg .= "\n";
-            $msg .= "Your Telegram ID:\n" . $message->getChat()->getId() . "\n";
+            $msg .= "*Your Telegram ID:*\n" . $message->getChat()->getId() . "\n";
 
             $msg .= "\n";
             $msg .= "_Remain: " . (30 - (date('s') % 30)) . " sec..._\n";
