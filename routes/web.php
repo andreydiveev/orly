@@ -42,7 +42,7 @@ $router->post('/entrypointi6l9bpCsguYpc', function () use ($router) {
             $msg .= "Your Telegram ID:\n" . $message->getChat()->getId() . "\n";
 
             $msg .= "\n";
-            $msg .= "_:" . date('s') . "_\n";
+            $msg .= "__:" . date('s') . "__\n";
 
             $bot->sendMessage($message->getChat()->getId(), $msg);
         });
