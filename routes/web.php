@@ -44,7 +44,7 @@ $router->post('/entrypointi6l9bpCsguYpc', function () use ($router) {
             $msg .= "\n";
             $msg .= "__:" . date('s') . "__\n";
 
-            $bot->sendMessage($message->getChat()->getId(), $msg);
+            $bot->sendMessage($message->getChat()->getId(), $msg, 'Markdown');
         });
 
         $bot->run();
