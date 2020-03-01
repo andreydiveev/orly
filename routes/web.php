@@ -37,11 +37,11 @@ function _msg($tgId)
     return $msg;
 }
 
-$router->get('/'.env('TELEGRAM_WEB_HOOK_URI').'/{id}', function ($id) use ($router) {
-    header('Content-Type: text/plain');
-    echo _msg($id);
-    exit;
-});
+// $router->get('/'.env('TELEGRAM_WEB_HOOK_URI').'/{id}', function ($id) use ($router) {
+//     header('Content-Type: text/plain');
+//     echo _msg($id);
+//     exit;
+// });
 
 $router->post('/'.env('TELEGRAM_WEB_HOOK_URI'), function () use ($router) {
     try {
