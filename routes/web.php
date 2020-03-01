@@ -53,4 +53,3 @@ $router->post('/'.env('TELEGRAM_WEB_HOOK_URI'), function () use ($router) {
         $e->getMessage();
     }
 });
-
