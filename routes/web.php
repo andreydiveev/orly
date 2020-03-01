@@ -15,21 +15,21 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-function _msg()
+function _msg($tgId)
 {
     $msg = "*Our 2fa:*\n";
 
     $g = new \Google\Authenticator\GoogleAuthenticator();
     $secrets = \App\Models\Secret::get();
     foreach ($secrets as $s) {
-        if ($message->getChat()->getId() != $s->owner_tg_id) {
+        if ($tgId != $s->owner_tg_id) {
           continue;
         }
         $msg .= $g->getCode(strtoupper($s->secret)) . " - " . $s->label . "\n";
     }
 
     $msg .= "\n";
-    $msg .= "*Your Telegram ID:*\n" . $message->getChat()->getId() . "\n";
+    $msg .= "*Your Telegram ID:*\n" . $tgId . "\n";
 
     $msg .= "\n";
     $msg .= "_Remain: " . (30 - (date('s') % 30)) . " sec..._\n";
@@ -37,9 +37,9 @@ function _msg()
     return $msg;
 }
 
-$router->get('/'.env('TELEGRAM_WEB_HOOK_URI'), function () use ($router) {
+$router->get('/'.env('TELEGRAM_WEB_HOOK_URI').'/{id}', function ($id) use ($router) {
     header('Content-Type: text/plain');
-    echo _msg();
+    echo _msg($id);
     exit;
 });
 
@@ -55,7 +55,8 @@ $router->post('/'.env('TELEGRAM_WEB_HOOK_URI'), function () use ($router) {
         });
 
         $bot->command('list', function ($message) use ($bot) {
-            $bot->sendMessage($message->getChat()->getId(), _msg(), 'Markdown');
+            $tgId = $message->getChat()->getId();
+            $bot->sendMessage($tgId, _msg($tgId), 'Markdown');
         });
 
         $bot->run();
