@@ -41,7 +41,7 @@ $router->get('/'.env('TELEGRAM_WEB_HOOK_URI'), function () use ($router) {
     header('Content-Type: text/plain');
     echo _msg();
     exit;
-}
+});
 
 $router->post('/'.env('TELEGRAM_WEB_HOOK_URI'), function () use ($router) {
     try {
