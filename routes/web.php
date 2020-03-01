@@ -15,6 +15,34 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+function _msg()
+{
+    $msg = "*Our 2fa:*\n";
+
+    $g = new \Google\Authenticator\GoogleAuthenticator();
+    $secrets = \App\Models\Secret::get();
+    foreach ($secrets as $s) {
+        if ($message->getChat()->getId() != $s->owner_tg_id) {
+          continue;
+        }
+        $msg .= $g->getCode(strtoupper($s->secret)) . " - " . $s->label . "\n";
+    }
+
+    $msg .= "\n";
+    $msg .= "*Your Telegram ID:*\n" . $message->getChat()->getId() . "\n";
+
+    $msg .= "\n";
+    $msg .= "_Remain: " . (30 - (date('s') % 30)) . " sec..._\n";
+    
+    return $msg;
+}
+
+$router->get('/'.env('TELEGRAM_WEB_HOOK_URI'), function () use ($router) {
+    header('Content-Type: text/plain');
+    echo _msg();
+    exit;
+}
+
 $router->post('/'.env('TELEGRAM_WEB_HOOK_URI'), function () use ($router) {
     try {
         $bot = new \TelegramBot\Api\Client(env('TELEGRAM_BOT_TOKEN'));
@@ -27,24 +55,7 @@ $router->post('/'.env('TELEGRAM_WEB_HOOK_URI'), function () use ($router) {
         });
 
         $bot->command('list', function ($message) use ($bot) {
-            $msg = "*Our 2fa:*\n";
-
-            $g = new \Google\Authenticator\GoogleAuthenticator();
-            $secrets = \App\Models\Secret::get();
-            foreach ($secrets as $s) {
-                if ($message->getChat()->getId() != $s->owner_tg_id) {
-                  continue;
-                }
-                $msg .= $g->getCode(strtoupper($s->secret)) . " - " . $s->label . "\n";
-            }
-
-            $msg .= "\n";
-            $msg .= "*Your Telegram ID:*\n" . $message->getChat()->getId() . "\n";
-
-            $msg .= "\n";
-            $msg .= "_Remain: " . (30 - (date('s') % 30)) . " sec..._\n";
-
-            $bot->sendMessage($message->getChat()->getId(), $msg, 'Markdown');
+            $bot->sendMessage($message->getChat()->getId(), _msg(), 'Markdown');
         });
 
         $bot->run();
