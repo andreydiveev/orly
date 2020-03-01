@@ -15,7 +15,7 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->post('/entrypointi6l9bpCsguYpc', function () use ($router) {
+$router->post('/'.env('TELEGRAM_WEB_HOOK_URI'), function () use ($router) {
     try {
         $bot = new \TelegramBot\Api\Client(env('TELEGRAM_BOT_TOKEN'));
         // or initialize with botan.io tracker api key
